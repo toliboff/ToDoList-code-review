@@ -1,29 +1,29 @@
 let current = null;
 let targetItem = null;
 
-export function dragStart() {
-  current = this;
+export const dragStart = (event) => {
+  current = event.target;
   current.classList.add('current-active');
-}
+};
 
-export function dragEnd() {
+export const dragEnd = () => {
   current.classList.remove('current-active');
   current = null;
-}
+};
 
-export function dragEnter(event) {
+export const dragEnter = (event) => {
   event.preventDefault();
-}
+};
 
-export function dragLeave() {
+export const dragLeave = () => {
   targetItem = null;
-}
+};
 
-export function allowDrop(event) {
+export const allowDrop = (event) => {
   event.preventDefault();
-}
+};
 
-export function drop(event) {
+export const drop = (event) => {
   targetItem = document.getElementById(event.target.parentNode.id);
   current.parentElement.insertBefore(current, targetItem);
   const children = Array.from(current.parentElement.children);
@@ -32,4 +32,4 @@ export function drop(event) {
   }
   ));
   localStorage.setItem('TodoList', JSON.stringify(updatedList));
-}
+};
